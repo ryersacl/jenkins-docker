@@ -17,7 +17,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'sudo docker push myapp/flask:$BUILD_NUMBER'
+                sh 'sudo docker push docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
             }
         }
 }
