@@ -23,7 +23,7 @@ pipeline {
     }
     post {
         always {
-            sh 'sudo podman logout'
+            sh 'sudo podman docker.io logout'
         }
     }
 }
