@@ -22,7 +22,7 @@ pipeline {
         stage('Push image') {
             steps {
                 //sh 'sudo podman tag localhost/myapp/flask:$BUILD_NUMBER docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
-                sh 'sudo podman push myapp/flask:$BUILD_NUMBER'
+                sh 'sudo podman push docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
             }
         }
     }
