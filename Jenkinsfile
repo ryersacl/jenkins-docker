@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build podman image') {
             steps {  
-                sh 'sudo podman build -t myapp/flask:$BUILD_NUMBER .'
+                sh 'sudo podman build -t docker.io/ryersacl/myapp/flask:$BUILD_NUMBER .'
             }
         }
         stage('Login to Docker Hub') {
