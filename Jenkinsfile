@@ -4,12 +4,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('ryersacl')
     }
     stages { 
-        stage('Clean up') {
-            steps {
-               sh 'sudo podman rmi docker.io/ryersacl/myapp/flask:$BUILD_NUMBER || true'
-            }
-        }
-        stage('Build podman image') {
+       stage('Build podman image') {
             steps {  
                 sh 'sudo podman build -t myapp/flask:$BUILD_NUMBER .'
             }
@@ -21,8 +16,8 @@ pipeline {
         }
         stage('Push image') {
             steps {
-                sh 'sudo podman tag localhost/myapp/flask:$BUILD_NUMBER docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
-                sh 'sudo podman push docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
+                sh 'sudo podman tag localhost/myapp/flask:$BUILD_NUMBER docker.io/ryersacl/flask:$BUILD_NUMBER'
+                sh 'sudo podman push docker.io/ryersacl/flask:$BUILD_NUMBER'
             }
         }
     }
