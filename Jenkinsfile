@@ -7,7 +7,7 @@ pipeline {
 
         stage('Build docker image') {
             steps {  
-                sh 'sudo docker build -t myapp/flask:$BUILD_NUMBER .'
+                sh 'sudo docker build -t localhost/myapp/flask:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
