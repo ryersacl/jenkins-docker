@@ -6,7 +6,7 @@ pipeline {
     stages { 
         stage('Clean up') {
             steps {
-                //sh 'sudo podman rmi docker.io/ryersacl/myapp/flask:$BUILD_NUMBER || true'
+               sh 'sudo podman rmi docker.io/ryersacl/myapp/flask:$BUILD_NUMBER || true'
             }
         }
         stage('Build podman image') {
