@@ -3,6 +3,11 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('ryersacl')
     }
+    stage('Clean up') {
+        steps {
+        sh 'sudo podman rmi docker.io/ryersacl/myapp/flask:$BUILD_NUMBER || true'  // ignore l'erreur si l'image n'existe pas
+        }
+    }
     stages { 
         stage('Build podman image') {
             steps {  
