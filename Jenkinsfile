@@ -17,7 +17,6 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo podman login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'sudo podman info'
             }
         }
         stage('Push image') {
