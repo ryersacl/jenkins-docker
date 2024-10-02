@@ -1,29 +1,28 @@
 pipeline {
     agent any 
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('ryersacl')
+        DOCKERHUB_CREDENTIALS = credentials('ryersacl')
     }
     stages { 
-
-        stage('Build docker image') {
+        stage('Build podman image') {
             steps {  
-                sh 'sudo docker build -t localhost/myapp/flask:$BUILD_NUMBER .'
+                sh 'sudo podman build -t myapp/flask:$BUILD_NUMBER .'
             }
         }
-        stage('login to dockerhub') {
-            steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        stage('Login to Docker Hub') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo podman login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
-        stage('push image') {
-            steps{
-                sh 'sudo docker push docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
+        stage('Push image') {
+            steps {
+                sh 'sudo podman push docker.io/myapp/flask:$BUILD_NUMBER docker.io/ryersacl/myapp/flask:$BUILD_NUMBER'
             }
         }
-}
-post {
+    }
+    post {
         always {
-            sh 'sudo docker logout'
+            sh 'sudo podman logout'
         }
     }
 }
